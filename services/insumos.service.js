@@ -13,7 +13,7 @@ class insumoService {
     for (let index = 0; index < limite; index++) {
       this.insumos.push({
         id: crypto.randomUUID(), //da el ID
-        nombre: 'cliente ' + index, //genera los nombres
+        nombre: 'insumo ' + index, //genera los nombres
         codigo: 10000 + Math.floor(Math.random()*190000000000),
         //estaBloqueado: Math.random() < 0.25 //valor boolean
       }); //genera DNI aleatorios entre 0 y 1
