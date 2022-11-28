@@ -1,6 +1,6 @@
 const {Model, DataTypes, Sequelize } = require ('sequelize');
 
-const VENTAS_TABLE = 'nuevas';
+const VENTTAS_TABLE = 'actualventa';
 
 const VentaSchema = {
   id: {
@@ -15,7 +15,6 @@ const VentaSchema = {
     allowNull: false,
     type: DataTypes.INTEGER
   },
-
   createdAT: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -32,11 +31,11 @@ class Venta extends Model {
   static config(sequelize){
     return{
       sequelize,
-      tableName: VENTAS_TABLE,
+      tableName: VENTTAS_TABLE,
       modelName: 'Venta',
       timestamps: false
     };
   }
 }
 
-module.exports ={ VENTAS_TABLE, VentaSchema, Venta};
+module.exports ={ VENTTAS_TABLE, VentaSchema, Venta};

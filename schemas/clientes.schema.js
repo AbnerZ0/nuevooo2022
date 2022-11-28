@@ -6,18 +6,28 @@ const nombre = Joi.string() //valor
                   .alphanum()
                   .min(8)
                   .max(20);
-const DNI = Joi.number() //valor
+const dni = Joi.number() //valor
                   .integer()
+                  .min(2);
+const sexo = Joi.string() //valor
+                  .min(2);
+const edad = Joi.number() //valor
                   .min(2);
 
 const createClienteSchema = Joi.object({
   nombre: nombre.required(),//etiqueta < >Valor
-  DNI: DNI.required()
+  dni: dni.required(),
+  sexo: sexo,
+  edad: edad
+
+
 });
 //creación de los objetos de validación, los esquemas
 const updateClienteSchema = Joi.object({
   nombre: nombre,
-  DNI: DNI
+  dni: dni,
+  sexo: sexo,
+  edad: edad
 });
 
 const getClienteSchema = Joi.object({

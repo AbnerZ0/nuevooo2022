@@ -1,11 +1,12 @@
+const { Cliente } = require('./clientes.model');
 const { TRABAJADOR_TABLE, TrabajadorSchema, Trabajador} = require('./trabajadores.model');
-/* const { VENTAS_TABLE, VentaSchema, Venta} = require('./ventas.model'); */
+const { VENTTAS_TABLE, VentaSchema, Venta} = require('./ven.model');
+const { CLIENTES_TABLE, ClienteSchema, Cliente} = require('./clientes.model');
 //repetir esto para invocar mas instancoias
 
 function setupModels(sequelize){
   Trabajador.init(TrabajadorSchema, Trabajador.config(sequelize));
-}
-/* function setupModels(sequelize){
   Venta.init(VentaSchema, Venta.config(sequelize));
-} */
+  Cliente.init(ClienteSchema, Cliente.config(sequelize));
+}
 module.exports= setupModels;
