@@ -1,6 +1,7 @@
 const { rejects } = require('assert');
 const crypto = require('crypto'); //para crear codigos UUID
 const boom = require('@hapi/boom');
+const {models} = require('./../libs/sequelize');
 
 class clienteService {
 
@@ -20,17 +21,20 @@ class clienteService {
     }
   }
 
-  create (data) {
+  async create (data) {
     const nuevocliente = {
       id: crypto.randomUUID(), //creo productos y le coloco us ID
       ...data //desempaquetado
     };
-    this.clientes.push(nuevocliente);
-    return nuevocliente; // devuelvo el nuevo producto en el metodo create
+    const salida = await models.Cliente1.create(nuevocliente);
+    return salida; // devuelvo el nuevo producto en el metodo create
   }
 
   async find() {
-    return this.clientes;
+    const salida = await models.Cliente1.findAll();
+ /*    const query = 'select * from usuarios';
+    const [data] = await sequelize.query(query); */
+    return salida;
     //
     //
     //
@@ -42,39 +46,23 @@ class clienteService {
   }
 
   async findOne(id) {
-    const client =  this.clientes.find(cliente => { //seguarda en la variable insum
-      return cliente.id === id;
-    }); //!ultizamos la negacición(!) para ver si es no es producto
-    if (!client) { //consulta del error
-      throw boom.notFound('Producto no encontrado'); //lanza un error boom
+    const nueva12 = await  models.Cliente1.findByPk(id);
+    if(!nueva12){
+      throw boom.notFound('abnerlas');
     }
-    return client; //si no es un error devuelve el insum
+    return nueva12;
   }
 
   async update(id , changes) {
-    const index = this.clientes.findIndex(cliente =>{
-      return cliente.id === id;
-    });
-    if (index === -1) {
-      throw boom.notFound('Producto no encontrado');
-    }
-    const cliente = this.clientes[index];
-    this.clientes[index] = {
-      ...cliente,
-      ...changes
-    };
-    return this.clientes[index];
+    const nueva22= await this.findOne(id);
+    const salida = await nueva22.update(changes);
+    return salida;
   }
 
   async delete(id) {
-    const index = this.clientes.findIndex(cliente =>{
-      return cliente.id === id;
-    });
-    if (index === -1) {
-      throw boom.notFound('Producto no encontrado');
-    }
-    this.clientes.splice(index, 1);
-    return { id };
+    const nueva33 = await this.findOne(id);
+    await nueva33.destroy();
+    return{id};
   }
 }
 

@@ -3,14 +3,13 @@ const Joi = require('joi');
 const id = Joi.string()
               .uuid();//campo id
 const nombre = Joi.string() //valor
-                  .alphanum()
+
                   .min(8)
                   .max(20);
 const dni = Joi.number() //valor
-                  .integer()
+
                   .min(2);
-const sexo = Joi.string() //valor
-                  .min(2);
+const sexo = Joi.string();
 const edad = Joi.number() //valor
                   .min(2);
 

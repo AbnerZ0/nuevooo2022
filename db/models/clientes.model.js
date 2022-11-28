@@ -13,15 +13,15 @@ const ClienteSchema = {
   },
   dni: {
     allowNull: false,
-    type: DataTypes.INTEGER
+    type: DataTypes.NUMBER
   },
   sexo: {
     allowNull: false,
-    type: DataTypes.INTEGER
+    type: DataTypes.STRING
   },
   edad: {
     allowNull: false,
-    type: DataTypes.INTEGER
+    type: DataTypes.NUMBER
   },
   createdAT: {
     allowNull: false,
@@ -31,7 +31,7 @@ const ClienteSchema = {
   }
 };
 
-class Cliente extends Model {
+class Cliente2 extends Model {
   static associate(){
 
   }
@@ -40,10 +40,10 @@ class Cliente extends Model {
     return{
       sequelize,
       tableName: CLIENTES_TABLE,
-      modelName: 'cliente',
+      modelName: 'Cliente1',
       timestamps: false
     };
   }
 }
 
-module.exports ={ CLIENTES_TABLE, ClienteSchema, Cliente};
+module.exports ={ CLIENTES_TABLE, ClienteSchema, Cliente2};
