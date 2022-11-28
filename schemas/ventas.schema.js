@@ -9,14 +9,19 @@ const nombre = Joi.string() //valor
 /* const cantidad = Joi.number() //valor
                   .integer()
                   .min(2); */
+const precio = Joi.number() //valor
+                  .integer()
+                  .min(2);
 
 const createVentaSchema = Joi.object({
-  nombre: nombre.required(),//etiqueta < >Valor
+  nombre: nombre.required(),
+  precio: precio//etiqueta < >Valor
  /*  cantidad: cantidad.required() */
 });
 //creación de los objetos de validación, los esquemas
 const updateVentaSchema = Joi.object({
   nombre: nombre,
+  precio: precio
   /* cantidad: cantidad */
 });
 

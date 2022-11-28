@@ -1,6 +1,7 @@
 const { rejects } = require('assert');
 const crypto = require('crypto'); //para crear codigos UUID
 const boom = require('@hapi/boom');
+const {models} = require('./../libs/sequelize');
 
 class ventaService {
 
@@ -20,17 +21,22 @@ class ventaService {
     }
   }
 
-  create (data) {
+  async create (data) {
     const nuevoventa = {
       id: crypto.randomUUID(), //creo productos y le coloco us ID
       ...data //desempaquetado
     };
-    this.ventas.push(nuevoventa);
-    return nuevoventa; // devuelvo el nuevo producto en el metodo create
+    const salida = await models.Venta.create(nuevoventa);
+    return salida; // devuelvo el nuevo producto en el metodo create
   }
 
   async find() {
-    return this.ventas;
+
+    const salida = await models.Venta.findAll();
+ /*    const query = 'select * from usuarios';
+    const [data] = await sequelize.query(query); */
+    return salida;
+
     //
     //
     //
@@ -42,17 +48,18 @@ class ventaService {
   }
 
   async findOne(id) {
-    const vent =  this.ventas.find(venta => { //seguarda en la variable insum
-      return venta.id === id;
-    }); //!ultizamos la negacición(!) para ver si es no es producto
-    if (!vent) { //consulta del error
-      throw boom.notFound('Producto no encontrado'); //lanza un error boom
+    const nueva1 = await  models.Venta.findByPk(id);
+    if(!nueva1){
+      throw boom.notFound('abnerlas');
     }
-    return vent; //si no es un error devuelve el insum
+    return nueva1;
   }
 
   async update(id , changes) {
-    const index = this.ventas.findIndex(venta =>{
+    const nueva2= await this.findOne(id);
+    const salida = await nueva2.update(changes);
+    return salida;
+    /* const index = this.ventas.findIndex(venta =>{
       return venta.id === id;
     });
     if (index === -1) {
@@ -63,18 +70,21 @@ class ventaService {
       ...venta,
       ...changes
     };
-    return this.ventas[index];
+    return this.ventas[index]; */
   }
 
   async delete(id) {
-    const index = this.ventas.findIndex(venta =>{
+    const nueva3 = await this.findOne(id);
+    await nueva3.destroy();
+    return{id};
+    /* const index = this.ventas.findIndex(venta =>{
       return venta.id === id;
     });
     if (index === -1) {
       throw boom.notFound('Producto no encontrado');
     }
     this.ventas.splice(index, 1);
-    return { id };
+    return { id }; */
   }
 }
 

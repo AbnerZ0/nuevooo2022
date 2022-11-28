@@ -3,21 +3,20 @@ const Joi = require('joi');
 const id = Joi.string()
               .uuid();//campo id
 const nombre = Joi.string() //valor
-                  .alphanum()
                   .min(8)
                   .max(20);
-const DNI = Joi.number() //valor
+const precio = Joi.number() //valor
                   .integer()
                   .min(2);
 
 const createTrabajadorSchema = Joi.object({
   nombre: nombre.required(),//etiqueta < >Valor
-  DNI: DNI.required()
+  precio: precio.required()
 });
 //creación de los objetos de validación, los esquemas
 const updateTrabajadorSchema = Joi.object({
   nombre: nombre,
-  DNI: DNI
+  precio: precio
 });
 
 const getTrabajadorSchema = Joi.object({

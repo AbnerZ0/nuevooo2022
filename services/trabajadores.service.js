@@ -1,6 +1,8 @@
 const { rejects } = require('assert');
 const crypto = require('crypto'); //para crear codigos UUID
 const boom = require('@hapi/boom');
+const {models} = require('./../libs/sequelize');
+
 
 class trabajadorService {
 
@@ -20,17 +22,20 @@ class trabajadorService {
     }
   }
 
-  create (data) {
+  async create (data) {
     const nuevotrabajador = {
       id: crypto.randomUUID(), //creo productos y le coloco us ID
       ...data //desempaquetado
     };
-    this.trabajadores.push(nuevotrabajador);
-    return nuevotrabajador; // devuelvo el nuevo producto en el metodo create
+    const salida = await models.Trabajador.create(nuevotrabajador);
+    return salida; // devuelvo el nuevo producto en el metodo create
   }
 
   async find() {
-    return this.trabajadores;
+    const salida = await models.Trabajador.findAll();
+ /*    const query = 'select * from usuarios';
+    const [data] = await sequelize.query(query); */
+    return salida;
     //
     //
     //
@@ -42,17 +47,25 @@ class trabajadorService {
   }
 
   async findOne(id) {
-    const trabaj =  this.trabajadores.find(trabajador => { //seguarda en la variable insum
+    const trabaj = await  models.Trabajador.findByPk(id);
+    if(!trabaj){
+      throw boom.notFound('abnerlas');
+    }
+    return trabaj;
+/*     const trabaj =  this.trabajadores.find(trabajador => { //seguarda en la variable insum
       return trabajador.id === id;
     }); //!ultizamos la negacición(!) para ver si es no es producto
     if (!trabaj) { //consulta del error
       throw boom.notFound('Producto no encontrado'); //lanza un error boom
     }
-    return trabaj; //si no es un error devuelve el insum
+    return trabaj; //si no es un error devuelve el insum */
   }
 
   async update(id , changes) {
-    const index = this.trabajadores.findIndex(trabajador =>{
+    const trabaj1= await this.findOne(id);
+    const salida = await trabaj1.update(changes);
+    return salida;
+/*     const index = this.trabajadores.findIndex(trabajador =>{
       return trabajador.id === id;
     });
     if (index === -1) {
@@ -63,18 +76,13 @@ class trabajadorService {
       ...trabajador,
       ...changes
     };
-    return this.trabajadores[index];
+    return this.trabajadores[index]; */
   }
 
   async delete(id) {
-    const index = this.trabajadores.findIndex(trabajador =>{
-      return trabajador.id === id;
-    });
-    if (index === -1) {
-      throw boom.notFound('Producto no encontrado');
-    }
-    this.trabajadores.splice(index, 1);
-    return { id };
+    const trabaj3 = await this.findOne(id);
+    await trabaj3.destroy();
+    return{id};
   }
 }
 
