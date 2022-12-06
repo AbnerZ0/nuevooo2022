@@ -1,8 +1,8 @@
 const {Model, DataTypes, Sequelize } = require ('sequelize');
 
-const VENTTAS_TABLE = 'actualventa';
+const VENTA_TABLE = 'tipoventa';
 
-const VentaSchema = {
+const TipoVentaSchema = {
   id: {
     primaryKey: true,
     type: DataTypes.UUID
@@ -15,6 +15,8 @@ const VentaSchema = {
     allowNull: false,
     type: DataTypes.INTEGER
   },
+
+
   createdAT: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -23,21 +25,19 @@ const VentaSchema = {
   }
 };
 
-class Venta extends Model {
-  static associate(models){  //esto es un metodo
-    this.belongsTo(models.TipoVenta, {as:'TipoVenta'});
-
+class TipoVenta  extends Model {
+  static associate(){
 
   }
 
   static config(sequelize){
     return{
       sequelize,
-      tableName: VENTTAS_TABLE,
-      modelName: 'Venta',
+      tableName: VENTA_TABLE,
+      modelName: 'TipoVenta',
       timestamps: false
     };
   }
 }
 
-module.exports ={ VENTTAS_TABLE, VentaSchema, Venta};
+module.exports ={ VENTA_TABLE, TipoVentaSchema, TipoVenta};

@@ -1,6 +1,6 @@
 const {Model, DataTypes, Sequelize } = require ('sequelize');
 
-const TRABAJADOR_TABLE = 'trabajadores';
+const TRABAJADOR_TABLE = 'trabajadores12';
 
 const TrabajadorSchema = {
   id: {

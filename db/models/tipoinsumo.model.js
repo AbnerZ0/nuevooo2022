@@ -1,8 +1,8 @@
 /* const {Model, DataTypes, Sequelize } = require ('sequelize');
 
-const CLIENTES_TABLE = 'clientess';
+const INSUMO_TABLE = 'tipoinsumo';
 
-const ClienteSchema = {
+const TipoInsumoSchema = {
   id: {
     primaryKey: true,
     type: DataTypes.UUID
@@ -11,18 +11,8 @@ const ClienteSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  dni: {
-    allowNull: false,
-    type: DataTypes.NUMBER
-  },
-  sexo: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  edad: {
-    allowNull: false,
-    type: DataTypes.NUMBER
-  },
+
+
   createdAT: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -31,7 +21,7 @@ const ClienteSchema = {
   }
 };
 
-class Cliente2 extends Model {
+class TipoInsumo  extends Model {
   static associate(){
 
   }
@@ -39,12 +29,12 @@ class Cliente2 extends Model {
   static config(sequelize){
     return{
       sequelize,
-      tableName: CLIENTES_TABLE,
-      modelName: 'Cliente1',
+      tableName: INSUMO_TABLE,
+      modelName: 'TipoInsumo',
       timestamps: false
     };
   }
 }
 
-module.exports ={ CLIENTES_TABLE, ClienteSchema, Cliente2};
+module.exports ={ INSUMO_TABLE, TipoInsumoSchema, TipoInsumo};
  */
