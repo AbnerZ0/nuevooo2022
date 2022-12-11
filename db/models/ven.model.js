@@ -38,9 +38,19 @@ const VentaSchema = {
 
 class Venta extends Model {
   static associate(models){  //esto es un metodo
-    this.belongsTo(models.TipoVenta, {as:'tipoventa'});
-
-
+/*     this.belongsTo(models.TipoVenta, {
+      foreignKey: {
+        name: 'PertenceTipoVenta'
+      }
+    }); */
+    /* this.belongsToMany(models.TipoVenta,{
+      through: 'venta_tipoventa'
+    }); */
+  this.belongsTo(models.TipoVenta, {
+      foreignKey: {
+        name: 'PertenceTipoVenta'
+      }
+    });
   }
 
   static config(sequelize){

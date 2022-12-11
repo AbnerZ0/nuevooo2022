@@ -11,5 +11,6 @@ function setupModels(sequelize){
 /*   Cliente2.init(ClienteSchema, Cliente2.config(sequelize)); */
 
   Venta.associate(sequelize.models);
+  TipoVenta.associate(sequelize.models);
 }
 module.exports= setupModels;

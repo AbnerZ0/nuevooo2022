@@ -26,8 +26,20 @@ const TipoVentaSchema = {
 };
 
 class TipoVenta  extends Model {
-  static associate(){
-
+  static associate(models){
+/*     this.hasOne(models.Venta, {
+      foreignKey: {
+        name: 'PertenceTipoVenta'
+      }
+    }); */
+    /* this.belongsToMany(models.Venta,{
+      through: 'venta_tipoventa'
+    }); */
+    this.hasMany(models.Venta, {
+      foreignKey: {
+        name: 'PertenceTipoVenta'
+      }
+    });
   }
 
   static config(sequelize){

@@ -31,20 +31,8 @@ class ventaService {
   }
 
   async find() {
-
     const salida = await models.Venta.findAll();
- /*    const query = 'select * from usuarios';
-    const [data] = await sequelize.query(query); */
     return salida;
-
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
   }
 
   async findOne(id) {
@@ -59,32 +47,13 @@ class ventaService {
     const nueva2= await this.findOne(id);
     const salida = await nueva2.update(changes);
     return salida;
-    /* const index = this.ventas.findIndex(venta =>{
-      return venta.id === id;
-    });
-    if (index === -1) {
-      throw boom.notFound('Producto no encontrado');
-    }
-    const venta = this.ventas[index];
-    this.ventas[index] = {
-      ...venta,
-      ...changes
-    };
-    return this.ventas[index]; */
+
   }
 
   async delete(id) {
     const nueva3 = await this.findOne(id);
     await nueva3.destroy();
     return{id};
-    /* const index = this.ventas.findIndex(venta =>{
-      return venta.id === id;
-    });
-    if (index === -1) {
-      throw boom.notFound('Producto no encontrado');
-    }
-    this.ventas.splice(index, 1);
-    return { id }; */
   }
 }
 
