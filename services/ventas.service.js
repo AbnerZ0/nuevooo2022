@@ -2,6 +2,7 @@ const { rejects } = require('assert');
 const crypto = require('crypto'); //para crear codigos UUID
 const boom = require('@hapi/boom');
 const {models} = require('./../libs/sequelize');
+const { TipoVenta } = require('../db/models/tipoventa.model');
 
 class ventaService {
 
@@ -31,7 +32,7 @@ class ventaService {
   }
 
   async find() {
-    const salida = await models.Venta.findAll();
+    const salida = await models.Venta.findAll({include: TipoVenta});
     return salida;
   }
 

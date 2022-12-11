@@ -11,11 +11,6 @@ const TipoVentaSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  precio: {
-    allowNull: false,
-    type: DataTypes.INTEGER
-  },
-
 
   createdAT: {
     allowNull: false,

@@ -4,19 +4,17 @@ const id = Joi.string()
               .uuid();//campo id
 const nombre = Joi.string() //valor
                   .max(20);
-const precio = Joi.number() //valor
-                  .integer()
-                  .min(2);
+
 
                     const createTipoVentaSchema = Joi.object({
-                        nombre: nombre.required(),
-                        precio: precio//etiqueta < >Valor
+                        nombre: nombre.required()
+                        //etiqueta < >Valor
                     /*  cantidad: cantidad.required() */
                     });
                     //creación de los objetos de validación, los esquemas
                     const updateTipoVentaSchema = Joi.object({
-                        nombre: nombre,
-                        precio: precio
+                        nombre: nombre
+
                         /* cantidad: cantidad */
                     });
 
