@@ -3,9 +3,7 @@ const Joi = require('joi');
 const id = Joi.string()
               .uuid();//campo id
 const nombre = Joi.string() //valor
-                  .alphanum()
-                  .min(8)
-                  .max(20);
+
 const codigo = Joi.number() //valor
                   .integer()
                   .min(2);

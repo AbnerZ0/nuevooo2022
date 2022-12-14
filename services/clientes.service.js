@@ -31,10 +31,8 @@ class clienteService {
   }
 
   async find() {
-    const salida = await models.Cliente1.findAll();
- /*    const query = 'select * from usuarios';
-    const [data] = await sequelize.query(query); */
-    return salida;
+
+    return this.clientes;
     //
     //
     //

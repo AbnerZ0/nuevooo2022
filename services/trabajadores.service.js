@@ -22,20 +22,19 @@ class trabajadorService {
     }
   }
 
-  async create (data) {
+  create (data) {
     const nuevotrabajador = {
       id: crypto.randomUUID(), //creo productos y le coloco us ID
       ...data //desempaquetado
     };
-    const salida = await models.Trabajador.create(nuevotrabajador);
-    return salida; // devuelvo el nuevo producto en el metodo create
+    this.trabajadores.push(nuevotrabajador)
+    return nuevotrabajador; // devuelvo el nuevo producto en el metodo create
   }
+
+
 
   async find() {
-    const salida = await models.Trabajador.findAll();
- /*    const query = 'select * from usuarios';
-    const [data] = await sequelize.query(query); */
-    return salida;
+    return this.trabajadores;
     //
     //
     //
@@ -45,27 +44,24 @@ class trabajadorService {
     //
     //
   }
+
 
   async findOne(id) {
-    const trabaj = await  models.Trabajador.findByPk(id);
-    if(!trabaj){
-      throw boom.notFound('abnerlas');
-    }
-    return trabaj;
-/*     const trabaj =  this.trabajadores.find(trabajador => { //seguarda en la variable insum
-      return trabajador.id === id;
+    const trabaja =  this.trabajadores.find(trabajadores => { //seguarda en la variable insum
+      return trabaja.id === id;
     }); //!ultizamos la negacición(!) para ver si es no es producto
-    if (!trabaj) { //consulta del error
+    if (!trabaja) { //consulta del error
       throw boom.notFound('Producto no encontrado'); //lanza un error boom
     }
-    return trabaj; //si no es un error devuelve el insum */
+    return trabaja; //si no es un error devuelve el insum
   }
 
+
+
+
+
   async update(id , changes) {
-    const trabaj1= await this.findOne(id);
-    const salida = await trabaj1.update(changes);
-    return salida;
-/*     const index = this.trabajadores.findIndex(trabajador =>{
+const index = this.trabajadores.findIndex(trabajador =>{
       return trabajador.id === id;
     });
     if (index === -1) {
@@ -76,14 +72,23 @@ class trabajadorService {
       ...trabajador,
       ...changes
     };
-    return this.trabajadores[index]; */
+    return this.trabajadores[index];
   }
 
-  async delete(id) {
-    const trabaj3 = await this.findOne(id);
-    await trabaj3.destroy();
-    return{id};
+
+
+
+async delete(id) {
+  const index = this.trabajadores.findIndex(trabajadores =>{
+    return trabajadores.id === id;
+  });
+  if (index === -1) {
+    throw boom.notFound('Producto no encontrado');
   }
+  this.trabajadores.splice(index, 1);
+  return { id };
 }
+}
+
 
 module.exports = trabajadorService

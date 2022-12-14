@@ -2,7 +2,7 @@ const { rejects } = require('assert');
 const crypto = require('crypto'); //para crear codigos UUID
 const boom = require('@hapi/boom');
 const {models} = require('./../libs/sequelize');
-const { TipoVenta } = require('../db/models/tipoventa.model');
+
 
 class ventaService {
 
@@ -27,17 +27,17 @@ class ventaService {
       id: crypto.randomUUID(), //creo productos y le coloco us ID
       ...data //desempaquetado
     };
-    const salida = await models.Venta.create(nuevoventa);
+    const salida = await models.ventas.create(nuevoventa);
     return salida; // devuelvo el nuevo producto en el metodo create
   }
 
   async find() {
-    const salida = await models.Venta.findAll({include: TipoVenta});
-    return salida;
+
+    return this.ventas;
   }
 
   async findOne(id) {
-    const nueva1 = await  models.Venta.findByPk(id);
+    const nueva1 = await  models.ventas.findByPk(id);
     if(!nueva1){
       throw boom.notFound('abnerlas');
     }
